@@ -8,7 +8,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse<T
     
     const { error, data } = await supabase
       .from<Task>("tasks")
-      .insert([{ description: `${username} ${password}`, title: 'aa', type: 'test', due: 'asdasdasd' }]);
+      .insert([{ description: `${username} ${password}`, title: 'aa', type: 'test', due: new Date() }]);
     
     
     return res.status(200).json({ error, data } as unknown as Task[])
