@@ -9,7 +9,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse<T
       .insert([{ description: JSON.stringify(req.body), title: 'aa', type: 'test', due: 'asdasdasd' }]);
     
     
-    return res.status(200).json({ error, data } as Task[])
+    return res.status(200).json({ error, data } as unknown as Task[])
   }
   
    const { data, count } = await supabase.from<Task>("tasks").select("*", { count: "exact" });
