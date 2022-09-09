@@ -6,7 +6,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse<T
   if (req.method === 'POST') {
     const { error, data } = await supabase
       .from<Task>("tasks")
-      .insert([{ description: JSON.stringfy(req.body), title: 'aa', type: 'test', due: 'asdasdasd' }]);
+      .insert([{ description: JSON.stringify(req.body), title: 'aa', type: 'test', due: 'asdasdasd' }]);
     
     return res.status(200).json(req.body as Task[])
   }
