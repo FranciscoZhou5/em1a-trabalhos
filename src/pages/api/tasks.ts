@@ -8,7 +8,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse<T
       .from<Task>("tasks")
       .insert([{ description: JSON.stringify(req.body), title: 'aa', type: 'test', due: 'asdasdasd' }]);
     
-    return res.status(200).json(req.body as Task[])
+    return res.status(200).json(data as Task[])
   }
   
   return res.status(200).send("Hello world!");
