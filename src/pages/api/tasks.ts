@@ -6,7 +6,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse<T
   if (req.method === 'POST') {
     const { data } = await supabase.from<Task>("tasks").select("*");
     
-    return res.status(200).json(data)
+    return res.status(200).json(data as Task[])
   }
   
   return res.status(200).send("Hello world!");
