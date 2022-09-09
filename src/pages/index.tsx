@@ -12,7 +12,7 @@ export default function LoginPage() {
   const auth = useAuth();
 
   useEffect(() => {
-    if (auth.user) {
+    if (auth.user.name) {
       router.push("/app");
     }
   }, [auth.user, router]);
