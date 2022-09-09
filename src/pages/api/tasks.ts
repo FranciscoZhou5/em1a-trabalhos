@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { supabase } from '../../lib/supabase';
 import { Task } from "../../types/Task";
 
-export default async function handle(req: NextApiRequest, res: NextApiResponse<Task[] | string>) {
+export default async function handle(req: NextApiRequest, res: NextApiResponse<Task[]>) {
   if (req.method === 'POST') {
     const { error, data } = await supabase
       .from<Task>("tasks")
@@ -11,5 +11,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse<T
     return res.status(200).json(data as Task[])
   }
   
-  return res.status(200).send("Hello world!");
+   const { data, count } = await supabase.from<Task>("tasks").select("*", { count: "exact" });
+  
+  return res.status(200).send(data as Task[]);
 }
