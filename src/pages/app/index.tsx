@@ -6,6 +6,7 @@ import { Task } from "../../types/Task";
 
 import Frame from "../../components/pages/App/Frame";
 import TasksList from "../../components/pages/App/TasksList";
+import api from "../../services/api";
 
 interface Props {
   tasks: {
@@ -48,14 +49,16 @@ const Home: AppPage<Props> = ({ tasks }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data, count } = await supabase.from<Task>("tasks").select("*", { count: "exact" });
+  // const { data, count } = await supabase.from<Task>("tasks").select("*", { count: "exact" });
+
+  const { data } = await api.get("/tasks?count");
 
   return {
     props: {
       tasks: {
         // data: [{ id: "1", title: "Teste", due: "04/12/2022", type: "test", owner: "Yuu", description: "" }],
-        data,
-        count,
+        data: data.data,
+        count: data.count,
       },
     },
   };
